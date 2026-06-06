@@ -1,0 +1,57 @@
+PAYMENTS MICROSERVICE (Stripe & Webhook)
+
+* Inicializr el microservice
+    -  Crear la app
+        $ nest new payments-ms
+            > ? Which package manager would you ❤️  to use? npm
+        $ cd payments-ms
+        $ npm run start         // Run development
+        $ npm run start:dev     // Run watch mode
+
+    - Instalar dependencias
+        + DotENV (Variables de entorno)
+            $ npm i dotenv
+        + Joi (Vaidador de Schema)
+            $ npm i joi
+
+    - NestJS CLI
+        + Crear un nuevo resource (Sin archivos de test)
+            $ nest g res payments --no-spec
+                > ? What transport layer do you use? REST API
+                > ? Would you like to generate CRUD entry points? (Y/n) n
+
+    - Postman
+        + Crete a new Workspace (Click "New" | "Workspace" > "Blank workspace")
+            > Name: "Ax2CDev"
+              Click "Create"
+        + Create a new collection (Click "+" | "Blank collection")
+            > Name: "ms-nestjs-payments-ms"
+
+        + HTTP requests
+            * Payment (Click "..." > Add folder > Name: "Payment")
+                - Create Payment Session
+                    > POST: http://localhost:3001/payments/create-payment-session                   Click "Send"
+                        > Body | raw (JSON)
+                            { }
+                - Payment Success
+                    > GET: http://localhost:3001/payments/success                                   Click "Send"
+                - Payment Cancel
+                    > GET: http://localhost:3001/payments/cancel                                    Click "Send"
+                - Stripe Webhook
+                    > POST: http://localhost:3001/payments/webhook                                  Click "Send"
+                        > Body | raw (JSON)
+                            { }
+
+    - GitHub
+        + Create new organization (Click "+ v" | "New organization" > Free | Click "Create a free organization")
+            > organization name: {{ORGANIZATION_NAME}}
+            > contact email: {{CONTACT_EMAIL}}
+            > [true] My personal account
+            > [true] I hereby accept Terms of Service....
+            Click "Next" | 
+            Click "Complete setup" | "Skip this step"
+        + Create new repository (Click "New")
+            > {{OWNER_MS_NAME}}/payments-ms
+            > Description: {{REPO_DESCRIPTION}}
+            > Public
+            Click 'Create reporitory'
