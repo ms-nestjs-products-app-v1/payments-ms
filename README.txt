@@ -13,6 +13,8 @@ PAYMENTS MICROSERVICE (Stripe & Webhook)
             $ npm i dotenv
         + Joi (Vaidador de Schema)
             $ npm i joi
+        + Stripe
+            $ npm install stripe --save
 
     - NestJS CLI
         + Crear un nuevo resource (Sin archivos de test)
@@ -55,3 +57,10 @@ PAYMENTS MICROSERVICE (Stripe & Webhook)
             > Description: {{REPO_DESCRIPTION}}
             > Public
             Click 'Create reporitory'
+
+* Stripe
+    - Sign up/Sign in.
+    - API keys (Click 'Developers' > API keys)
+        > Copy 'Secret key'
+    - Documentation (Click 'Help icon' > '... More' > Developer Docs)
+        + Server-Side SDKs (Click 'Get started with Stripe' > 'Developer resources' > ESSENTIALS | SDKs | Server-side SDKs)
