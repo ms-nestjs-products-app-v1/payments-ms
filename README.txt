@@ -15,6 +15,8 @@ PAYMENTS MICROSERVICE (Stripe & Webhook)
             $ npm i joi
         + Stripe
             $ npm install stripe --save
+        + Validation (Validacion de la data)
+            $ npm i --save class-validator class-transformer
 
     - NestJS CLI
         + Crear un nuevo resource (Sin archivos de test)
@@ -34,7 +36,21 @@ PAYMENTS MICROSERVICE (Stripe & Webhook)
                 - Create Payment Session
                     > POST: http://localhost:3001/payments/create-payment-session                   Click "Send"
                         > Body | raw (JSON)
-                            { }
+                            {
+                                "currency": "usd",
+                                "items": [
+                                    {
+                                        "name": "Teclado Mecánico",
+                                        "price": 100,
+                                        "quantity": 2
+                                    },
+                                    {
+                                        "name": "Mouse Mecánico",
+                                        "price": 45.99,
+                                        "quantity": 2
+                                    }
+                                ]
+                            }
                 - Payment Success
                     > GET: http://localhost:3001/payments/success                                   Click "Send"
                 - Payment Cancel
