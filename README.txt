@@ -64,3 +64,5 @@ PAYMENTS MICROSERVICE (Stripe & Webhook)
         > Copy 'Secret key'
     - Documentation (Click 'Help icon' > '... More' > Developer Docs)
         + Server-Side SDKs (Click 'Get started with Stripe' > 'Developer resources' > ESSENTIALS | SDKs | Server-side SDKs)
+    - Test card numbers (URL: https://docs.stripe.com/testing)
+    - Payments (Dashboard > Transactions > Transactions | Payments)
