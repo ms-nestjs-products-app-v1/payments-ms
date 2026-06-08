@@ -17,6 +17,8 @@ PAYMENTS MICROSERVICE (Stripe & Webhook)
             $ npm install stripe --save
         + Validation (Validacion de la data)
             $ npm i --save class-validator class-transformer
+        + Stripe CLI
+            $ npm i -g @stripe/cli
 
     - NestJS CLI
         + Crear un nuevo resource (Sin archivos de test)
@@ -82,3 +84,11 @@ PAYMENTS MICROSERVICE (Stripe & Webhook)
         + Server-Side SDKs (Click 'Get started with Stripe' > 'Developer resources' > ESSENTIALS | SDKs | Server-side SDKs)
     - Test card numbers (URL: https://docs.stripe.com/testing)
     - Payments (Dashboard > Transactions > Transactions | Payments)
+    - Webhooks 
+        + Test with a local listener (Click 'Developers' > 'Webhooks' > 'Test with a local listener') [Verificar pago con Stripe CLI]
+            * Install Stripe CLI and log in
+                $ npm i -g @stripe/cli
+            * Forward events to your destination
+                $ stripe listen --forward-to localhost:4242/payments/webhooks
+            * Trigger events with the CLI
+                $ stripe trigger payment_intent.succeeded
