@@ -46,8 +46,7 @@ export class PaymentsService {
 
     let event: any;
     // If you are using an endpoint defined with the API or dashboard, look in your webhook settings at https://dashboard.stripe.com/webhooks
-    const endpointSecret =
-      'whsec_607ba667c50b80b3a6f54b0b6bf9cf388493b08a2902a96c11ba708bb0fa668e';
+    const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET!;
 
     try {
       event = this.stripeClient.webhooks.constructEvent(
@@ -62,7 +61,15 @@ export class PaymentsService {
       return;
     }
 
-    console.log(event);
+    switch (event.type) {
+      case 'charge.succeeded':
+        // TODO: Llamar nuestro microservice
+        console.log(event);
+        break;
+      default:
+        console.log(`Event ${event.type} not handled`);
+    }
+
     return res.status(HttpStatus.OK).json({ signature }); // 200
   }
 }

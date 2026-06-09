@@ -19,6 +19,8 @@ PAYMENTS MICROSERVICE (Stripe & Webhook)
             $ npm i --save class-validator class-transformer
         + Stripe CLI
             $ npm i -g @stripe/cli
+        + Hookdeck CLI (Event Gateway)
+            $ npm install hookdeck-cli -g
 
     - NestJS CLI
         + Crear un nuevo resource (Sin archivos de test)
@@ -92,3 +94,54 @@ PAYMENTS MICROSERVICE (Stripe & Webhook)
                 $ stripe listen --forward-to localhost:4242/payments/webhooks
             * Trigger events with the CLI
                 $ stripe trigger payment_intent.succeeded
+        + Add destination (Click 'Developers' > 'Webhooks' > 'Add destination')
+            * Create an event destination
+                - Configure your event destination
+                    > Your account
+                    > Events: charge.succeeded
+                    Click 'Continue'
+                - Choose where you want to send events
+                    > Webhook endpoint
+                    Click 'Continue'
+                - Configure Destination
+                    > Destaination name: {{GENERATE}} // inspiring-rhythm
+                    > Endpoint URL: {{HOOKDECK_RESQUEST_TO_URL}}
+                    > Description: 
+                      Stripe to Localhost
+                      /payments/webhook
+                    Click 'Create destination'
+                - Within the 'Event destinations'
+                    > Copy 'Signing secret' and replace it in the .env
+                    > Click 'Send test event'
+                - COPY 'Signing secret'
+
+    - Hookdeck (Event Gateway - Puerta de enlace de eventos)
+        + Sign in/Sign out
+        + First config
+             > Organization name: Ax2CDev
+             > Select the product you'd like to use: Event Gateway
+             Click 'Create Project'
+        + Create your fisrt Hookdeck connection
+            * Crear fisrt connection (Click 'Connections' > 'Create first connection')
+                > Source Type: Stripe
+                > Source Name: stripe-to-localhost
+                Click 'Next'
+            * Trigger HTTP requests to your Hookdeck source URL
+                > Test using mock request
+                Click 'Send mock request'
+            * Inspect inbound HTTP requests
+                Click 'Next'
+            * Define your event destination
+                > CLI
+                > Destination Name: to-localhost
+                > CLI Path: /payments/webhook
+                Click 'Next'
+            * Define your connection rules
+                Click 'Next'
+            * Install the Hookdeck CLI
+                Click 'Next'
+            * Authenticate the CLI
+                $ hookdeck login --cli-key {{KEY}}
+            * Connect CLI to your local server
+                $ hookdeck listen 3003 stripe-to-localhost --path /webhooks
+                    > Copy URL (stripe-to-localhost > Request to -> URL)
