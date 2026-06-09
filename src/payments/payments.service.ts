@@ -36,8 +36,8 @@ export class PaymentsService {
       },
       line_items: lineItems,
       mode: 'payment',
-      success_url: 'http://localhost:3003/payments/success',
-      cancel_url: 'http://localhost:3003/payments/cancel',
+      success_url: envs.stripeSuccessUrl,
+      cancel_url: envs.stripeCancelUrl,
     });
 
     return session;
@@ -48,7 +48,7 @@ export class PaymentsService {
 
     let event: any;
     // If you are using an endpoint defined with the API or dashboard, look in your webhook settings at https://dashboard.stripe.com/webhooks
-    const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET!;
+    const endpointSecret = envs.stripeEndpointSecret;
 
     try {
       event = this.stripeClient.webhooks.constructEvent(
