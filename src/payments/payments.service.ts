@@ -42,9 +42,27 @@ export class PaymentsService {
   }
 
   stripeWebhook(req: Request, res: Response) {
-    const signature = req.headers['stripe-signature'];
-    console.log({ signature });
+    const signature = req.headers['stripe-signature']!;
 
+    let event: any;
+    // If you are using an endpoint defined with the API or dashboard, look in your webhook settings at https://dashboard.stripe.com/webhooks
+    const endpointSecret =
+      'whsec_607ba667c50b80b3a6f54b0b6bf9cf388493b08a2902a96c11ba708bb0fa668e';
+
+    try {
+      event = this.stripeClient.webhooks.constructEvent(
+        req['rawBody'],
+        signature,
+        endpointSecret,
+      );
+    } catch (err) {
+      res
+        .status(HttpStatus.BAD_REQUEST)
+        .send(`Webhook error: ${err?.message}}`); // 400
+      return;
+    }
+
+    console.log(event);
     return res.status(HttpStatus.OK).json({ signature }); // 200
   }
 }
