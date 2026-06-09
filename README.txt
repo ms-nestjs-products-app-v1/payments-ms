@@ -41,17 +41,18 @@ PAYMENTS MICROSERVICE (Stripe & Webhook)
                     > POST: http://localhost:3001/payments/create-payment-session                   Click "Send"
                         > Body | raw (JSON)
                             {
+                                "orderId": "ABC123",
                                 "currency": "usd",
                                 "items": [
                                     {
-                                        "name": "Teclado Mecánico",
-                                        "price": 100,
-                                        "quantity": 2
+                                    "name": "Teclado Mecánico",
+                                    "price": 450,
+                                    "quantity": 3
                                     },
                                     {
-                                        "name": "Mouse Mecánico",
-                                        "price": 45.99,
-                                        "quantity": 2
+                                    "name": "Mouse Mecánico",
+                                    "price": 95.99,
+                                    "quantity": 2
                                     }
                                 ]
                             }
