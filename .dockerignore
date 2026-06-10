@@ -1,0 +1,6 @@
+# Ax2CDev
+node_modules/
+dist/
+.git
+.env
+.vscode
