@@ -1,5 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { Logger, ValidationPipe } from '@nestjs/common';
+import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 
 import { AppModule } from './app.module';
 import { envs } from './config';
@@ -16,6 +17,16 @@ async function bootstrap() {
       forbidNonWhitelisted: true,
     }),
   );
+
+  // Hybrid microservice
+  app.connectMicroservice<MicroserviceOptions>({
+    transport: Transport.NATS,
+    options: {
+      servers: envs.natsServers,
+    },
+  });
+  await app.startAllMicroservices(); // Inicializa e inicia  multiple oyentes (transporters) en una app hibrida
+
   await app.listen(envs.port);
   logger.log(`Payment Microservice running on port ${envs.port}}`);
 }

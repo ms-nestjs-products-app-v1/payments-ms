@@ -21,6 +21,10 @@ PAYMENTS MICROSERVICE (Stripe & Webhook)
             $ npm i -g @stripe/cli
         + Hookdeck CLI (Event Gateway)
             $ npm install hookdeck-cli -g
+        + microservice
+            $ npm i --save @nestjs/microservices
+        + NATS (Transporter)
+            $ npm i --save nats
 
     - NestJS CLI
         + Crear un nuevo resource (Sin archivos de test)
