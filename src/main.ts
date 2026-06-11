@@ -19,12 +19,17 @@ async function bootstrap() {
   );
 
   // Hybrid microservice
-  app.connectMicroservice<MicroserviceOptions>({
-    transport: Transport.NATS,
-    options: {
-      servers: envs.natsServers,
+  app.connectMicroservice<MicroserviceOptions>(
+    {
+      transport: Transport.NATS,
+      options: {
+        servers: envs.natsServers,
+      },
     },
-  });
+    {
+      inheritAppConfig: true, // Sharring configuration (inherit global pipes, interceptors, etc)
+    },
+  );
   await app.startAllMicroservices(); // Inicializa e inicia  multiple oyentes (transporters) en una app hibrida
 
   await app.listen(envs.port);
